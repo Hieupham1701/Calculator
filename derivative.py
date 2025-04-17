@@ -40,6 +40,10 @@ class Limit :
 		msg = " Begin calculating limit."
 		return msg
 class FunctionLimit:
+	def __init__(self,numerator,denominator,x):
+		self.numerator = numerator
+		self.denominator = denominator
+		self.x = x
 	
 def calculate_limit_polynomial(function,x):
 	# Calculates the value of a polynomial at a specific x-value.
