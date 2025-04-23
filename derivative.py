@@ -1,3 +1,7 @@
+import math
+import sympy as sp 
+
+
 class Limit :
 	def __init__(self,numerator,denominator,x):
  # Initializes the Limit object with a numerator, denominator (both polynomials), and an x-value.
@@ -40,11 +44,14 @@ class Limit :
 		msg = " Begin calculating limit."
 		return msg
 class FunctionLimit:
-	def __init__(self,numerator,denominator,x):
-		self.numerator = numerator
-		self.denominator = denominator
-		self.x = x
-	
+	def __init__(self,numerator,denominator,x_value):
+		self.x = sp.Symbol('x') # Using sympy to create a symbol for x
+		self.numerator = sp.sympify(numerator) # Convert the numerator to a sympy expression
+		self.denominator = sp.sympify(denominator) # Convert the denominator to a sympy expression
+		self.x_value = x_value # The x-value at which to evaluate the limit
+	def calculate_limit(self,direction = '+'):
+		# Calculate the limit of a function as x approaches a specific value.
+		return sp.limit(self.numerator / self.denominator, self.x, self.x_value, dir=direction)
 def calculate_limit_polynomial(function,x):
 	# Calculates the value of a polynomial at a specific x-value.
 		value = 0
@@ -68,8 +75,15 @@ def print_function(dict_coeff):
             visualized_function += " + "
         visualized_function += term
     return visualized_function
-ask_user =input("Choose 'Poly' for polynomial and 'Rati' for Rational: ")
-if ask_user == "Poly":
+ask_user =input("Choose 'Poly' for polynomial or 'Rati' for Rational or 'Function' for function: ").strip() # Ask the user to choose between polynomial or rational function or function
+if ask_user == "Function":
+	numerator = input("Enter the numerator of the function: ")
+	denominator = input("Enter the denominator of the function: ")
+	x = int(input("Calculate the limit as x approaches: "))
+	function_limit = FunctionLimit(numerator, denominator, x)
+	value = function_limit.calculate_limit()
+	print(f"The limit of the function as x approaches {x} is {value}")
+elif ask_user == "Poly":
 	n = int(input("Enter the degree of the polynomial: "))
 	x = int(input("Calculate the limit of the polynomial at x approaches: "))
 	if n <= 0:
