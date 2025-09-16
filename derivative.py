@@ -59,8 +59,32 @@ class Polynomial:
 		for power,coeff in self.function.items():
 			value += coeff * self.x ** power
 		return value
+	def calculate_derivatives(self):
+		# Calculating the derivative of a polynomial function when x approaches a concrete value.
+		value = 0
+		for power,coeff in function.items(): # power present for key and coeff present for value in "dictionary" polynomial
+			if power > 0:
+				value += coeff * (power) * self.x**(power-1)
+		return value
+	def derivatives(self):
+		result = {}
+		for power, coeff in self.function.items():
+			if power > 0:
+				result[power-1] = coeff * (power-1)
+		s = ""
+		for power , coeff in result:
+			if coeff == 0:
+				continue
+			elif power ==0:
+				s+= f"{coeff}"
+			elif power == 1:
+				s += f"{coeff}x + "
+			else:
+				s+= f"{coeff}x^{power} + "
+		return s.rstrip(" + ")
+			
 class Integral:
-	def __init__(self,function, a,b):
+	def __init__(self,function, a = None,b = None):
 		self.function = self.function 
 		self.a = a
 		self.b = b
@@ -72,12 +96,31 @@ class Integral:
 			value += (new_coef * (self.x ** new_power))
 		return value 
 	def evaluate_function(self):
-		return self.function_at_point(self.b) - self.function_at_point(self.a)		
+		return self.function_at_point(self.b) - self.function_at_point(self.a)
+	def create_function(self):
+		value = {}
+		for power, coeff in self.function:
+			new_power = power + 1
+			new_coeff = coeff // new_power
+			value[new_power] =  new_coeff
+		s = ""
+		for power , coeff in value:
+			if coeff == 0:
+				continue
+			elif power ==0:
+				s+= f"{coeff}"
+			elif power == 1:
+				s += f"{coeff}x + "
+			else:
+				s+= f"{coeff}x^{power} + "
+		return s.rstrip(" + ") 
+		
+				
 	
 	
 		
 
-| Thành phần              | Công nghệ                              |
+'''| Thành phần              | Công nghệ                              |
 | ----------------------- | -------------------------------------- |
 | Giao diện người dùng    | Tkinter                                |
 | Lưu trữ lịch sử         | SQLite                                 |
@@ -85,4 +128,4 @@ class Integral:
 | Nhập biểu thức nâng cao | SymPy                                  |
 | Xuất kết quả ra file    | CSV, PDF                               |
 | Giao diện đẹp hơn       | ttkbootstrap, customtkinter            |
-| Quản lý dự án tốt hơn   | Chia module + cấu trúc thư mục rõ ràng |
+| Quản lý dự án tốt hơn   | Chia module + cấu trúc thư mục rõ ràng |'''
