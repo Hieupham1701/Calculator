@@ -1,0 +1,3 @@
+Polynomial you want to calculate limit is  4x^2 + 3x^1 + 2
+The limit of the polynomial as x approaches 1 is 9
+Calculate limit is so easy ^-^. Bingo!! You scored 100 in Math121 ! See you again
